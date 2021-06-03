@@ -11,7 +11,7 @@ export default {
   },
 
   render() {
-    return <h1>{a}</h1>;
+    return <a-button type="primary">{a}</a-button>;
   },
 
   methods: {},

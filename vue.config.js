@@ -1,4 +1,5 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const webpack = require('webpack');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isAnalyze = process.env.ANALYZE === 'true';
@@ -25,13 +26,17 @@ module.exports = {
 
   // webpack 链式配置
   chainWebpack: (config) => {
-    config.when(isAnalyze, (conf) => {
-      conf.plugin('bundle-analyzer').use(
-        new BundleAnalyzerPlugin({
-          analyzerPort: 8081,
-        })
-      );
-    });
+    config
+      .when(isAnalyze, (conf) => {
+        conf.plugin('bundle-analyzer').use(
+          new BundleAnalyzerPlugin({
+            analyzerPort: 8081,
+          })
+        );
+      })
+      .plugin('ignore')
+      .use(webpack.IgnorePlugin)
+      .tap((args) => [...args, /^\.\/locale$/, /moment$/]);
   },
 
   // 项目样式文件配置
