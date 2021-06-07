@@ -10,5 +10,14 @@ module.exports = {
       },
       'ant-design-vue',
     ],
+    [
+      'import',
+      {
+        libraryName: 'lodash',
+        libraryDirectory: '',
+        camel2DashComponentName: false,
+      },
+      'lodash',
+    ],
   ],
 };
