@@ -3,8 +3,8 @@ import Vue from 'vue';
 /**
  * 状态机参数命名
  *
- * @param {string} prefix 前缀
- * @returns {string} 拼接参数名
+ * @param {String} prefix 前缀
+ * @returns {String} 拼接参数名
  */
 export const makeConstCreator = (prefix) => {
   const constantList = [];
