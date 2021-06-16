@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import NProgress from 'nprogress';
 
 import { setConsumptionTags, setIncomeTags, setUserTags } from '@/store/configuration';
 
@@ -23,6 +24,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   const {
     app: {
       $options: {
@@ -32,6 +34,10 @@ router.beforeEach((to, from, next) => {
   } = router;
   [setConsumptionTags, setIncomeTags, setUserTags].forEach((action) => dispatch(action));
   next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import 'nprogress/nprogress.css';
 import { Button } from 'ant-design-vue';
 
 import App from './App';
