@@ -57,6 +57,8 @@ export default class Base {
    */
   async retrieve(tableName, payload) {
     const db = await this.database;
+    if (!payload) return db.getAll(tableName);
+
     const indexes = Object.keys(payload);
     const oprations = indexes.map((key) => db.getAllFromIndex(tableName, key, payload[key]));
     return Promise.all(oprations).then((res) => {
