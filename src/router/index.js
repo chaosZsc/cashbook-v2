@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import { setConsumptionTags, setIncomeTags, setUserTags } from '@/store/configuration';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,6 +20,18 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const {
+    app: {
+      $options: {
+        store: { dispatch },
+      },
+    },
+  } = router;
+  [setConsumptionTags, setIncomeTags, setUserTags].forEach((action) => dispatch(action));
+  next();
 });
 
 export default router;
