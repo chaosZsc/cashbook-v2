@@ -1,32 +1,56 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <a-config-provider :locale="zhCN">
+    <a-layout :class="$style.Root">
+      <a-layout-sider v-model="collapsed" collapsible>
+        <h1 :class="$style.Logo">
+          <a-icon type="account-book" />
+          {{ collapsed ? '' : 'cashbook' }}
+        </h1>
+      </a-layout-sider>
+
+      <a-layout>
+        <a-layout-header> </a-layout-header>
+
+        <a-layout-content>
+          <router-view />
+        </a-layout-content>
+      </a-layout>
+    </a-layout>
+  </a-config-provider>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
+
+export default {
+  name: 'App',
+
+  data() {
+    return {
+      zhCN,
+      collapsed: false,
+    };
+  },
+};
+</script>
+
+<style lang="scss" module>
+.Root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.Logo {
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  color: #ffffff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 </style>
