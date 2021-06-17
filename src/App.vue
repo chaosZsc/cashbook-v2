@@ -3,17 +3,23 @@
     <a-layout :class="$style.Root">
       <a-layout-sider v-model="collapsed" collapsible>
         <h1 :class="$style.Logo">
-          <a-icon type="account-book" />
-          {{ collapsed ? '' : 'cashbook' }}
+          <router-link to="/home">
+            <a-icon type="account-book" />
+            {{ collapsed ? '' : 'cashbook' }}
+          </router-link>
         </h1>
+
+        <main-menu />
       </a-layout-sider>
 
       <a-layout>
-        <a-layout-header> </a-layout-header>
+        <a-layout-header></a-layout-header>
 
         <a-layout-content>
           <router-view />
         </a-layout-content>
+
+        <a-layout-footer> Cashbook ©2018 Created by ChaosZsc </a-layout-footer>
       </a-layout>
     </a-layout>
   </a-config-provider>
@@ -22,14 +28,39 @@
 <script>
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 
+import { routes } from '@/router';
+
 export default {
   name: 'App',
 
+  components: {
+    MainMenu: () => import('./components/MainMenu'),
+  },
+
   data() {
+    const routeMap = {};
+    routes.forEach((route) => {
+      const { name } = route;
+      if (name) routeMap[name] = route;
+    });
+
     return {
       zhCN,
       collapsed: false,
+      routeMap,
     };
+  },
+
+  computed: {
+    title(ctx) {
+      const {
+        $route: { name },
+        routeMap,
+      } = ctx;
+      const { meta } = routeMap[name] || {};
+      const { title } = meta || {};
+      return title;
+    },
   },
 };
 </script>
@@ -39,6 +70,17 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  & :global {
+    .ant-layout {
+      &-content {
+        overflow: hidden;
+      }
+
+      &-footer {
+        text-align: center;
+      }
+    }
+  }
 }
 
 .Logo {
