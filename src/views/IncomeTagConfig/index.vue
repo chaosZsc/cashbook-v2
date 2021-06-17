@@ -1,12 +1,10 @@
 <template>
-  <div :class="$style.Root">
-    <img alt="Vue logo" src="../assets/logo.png" />
-  </div>
+  <div :class="$style.Root"></div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'IncomeTagConfig',
 
   data() {
     return {};
