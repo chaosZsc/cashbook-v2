@@ -6,16 +6,42 @@ import { setConsumptionTags, setIncomeTags, setUserTags } from '@/store/configur
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home'),
+    redirect: '/home',
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About'),
+    path: '/home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home'),
+    meta: {
+      title: '首页',
+    },
+  },
+  {
+    path: '/consumptionTagConfig',
+    name: 'ConsumptionTagConfig',
+    component: () => import(/* webpackChunkName: "consumptionTagConfig" */ '../views/ConsumptionTagConfig'),
+    meta: {
+      title: '消费标签配置',
+    },
+  },
+  {
+    path: '/incomeTagConfig',
+    name: 'IncomeTagConfig',
+    component: () => import(/* webpackChunkName: "incomeTagConfig" */ '../views/IncomeTagConfig'),
+    meta: {
+      title: '收入标签配置',
+    },
+  },
+  {
+    path: '/userTagConfig',
+    name: 'UserTagConfig',
+    component: () => import(/* webpackChunkName: "userTagConfig" */ '../views/UserTagConfig'),
+    meta: {
+      title: '人员标签配置',
+    },
   },
 ];
 
